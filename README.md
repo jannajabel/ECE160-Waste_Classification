@@ -1,1 +1,2 @@
-# ECE160-Project
+# ECE160 - Electronic Components Classification
+| Dolojo , Jabel , Tillan
