@@ -1,2 +1,2 @@
 # ECE160 - Electronic Components Classification
-| Dolojo , Jabel , Tillan
+##Dolojo , Jabel , Tillan
