@@ -1,2 +1,2 @@
-# ECE160 - Electronic Components Classification
+# ECE160 - Waste Classifier
 ## Dolojo , Jabel , Tillan
