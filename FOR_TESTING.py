@@ -14,19 +14,8 @@ from pylab import *
 import imutils
 import numpy
 
-DIR = "C:/Users/ACER-PC/Desktop/ECE160/ECE160-Waste_Classification/Dataset"
-train_dataset = tf.keras.preprocessing.image_dataset_from_directory(DIR, validation_split=0.1, subset="training", seed=42, batch_size=128, smart_resize=True, image_size=(256, 256))
-test_dataset = tf.keras.preprocessing.image_dataset_from_directory(DIR, validation_split=0.1, subset="validation", seed=42, batch_size=128, smart_resize=True, image_size=(256, 256))
 
-classes = train_dataset.class_names
-numClasses = len(train_dataset.class_names)
-print(classes)
-
-AUTOTUNE = tf.data.AUTOTUNE
-
-train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
-test_dataset = test_dataset.prefetch(buffer_size=AUTOTUNE)
-new_model = tf.keras.models.load_model("C:/Users/ACER-PC/Desktop/ECE160/ECE160-Waste_Classification/version_200epochs.h5")
+new_model = tf.keras.models.load_model("C:/Users/ACER-PC/Desktop/ECE160/ECE160-Waste_Classification/version_three.h5")
 
 DIR = "C:/Users/ACER-PC/Desktop/ECE160/ECE160-Waste_Classification/Dataset"
 train_dataset = tf.keras.preprocessing.image_dataset_from_directory(DIR, validation_split=0.1, subset="training", seed=42, batch_size=128, smart_resize=True, image_size=(256, 256))
@@ -87,5 +76,6 @@ images =  ps.putBText(image,text,text_offset_x = 110,
                       )
 
 plt.imshow(cv2.cvtColor(images, cv2.COLOR_BGR2RGB), interpolation = 'bicubic')
+plt.savefig('C:/Users/ACER-PC/Desktop/ECE160/ECE160-Waste_Classification/Tests/Test1.png')
 plt.show()
-print(predictions[0]*100, "\n", classes)
+print(predictions[0]*100, "\n", dic)
