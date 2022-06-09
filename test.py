@@ -16,16 +16,16 @@ import imutils
 import numpy
 
 
-new_model = tf.keras.models.load_model("D:/FILES/SCHOOL/WASTE/WasteClassificationNeuralNetwork/ECE160-Waste_Classification/version_three.h5")
+new_model = tf.keras.models.load_model("D:/FILES/SCHOOL/160/ECE160-Waste_Classification/version_three.h5")
 
-DIR = "D:/FILES/SCHOOL/WASTE/WasteClassificationNeuralNetwork/ECE160-Waste_Classification/Dataset"
+DIR = "D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Dataset"
 train_dataset = tf.keras.preprocessing.image_dataset_from_directory(DIR, validation_split=0.1, subset="training", seed=42, batch_size=128, smart_resize=True, image_size=(256, 256))
 
 dic = train_dataset.class_names
 numClasses = len(train_dataset.class_names)
 
 def capture_waste():
-    cam = cv2.VideoCapture(1) 
+    cam = cv2.VideoCapture(0) 
     cv2.namedWindow("Waste Classifier")
     img_counter = 0
     
@@ -61,7 +61,7 @@ def capture_waste():
 
     predictions = new_model.predict(img_array)[0]
     i = np.argmax(predictions)
-    waste_types = ['Aluminum','Cardboard','Carton','Glass','Organic Waste','Other Plastics','Paper','Paper','Plastic','Textiles','Wood']
+    waste_types = ['Aluminum','Cardboard','Carton','Glass','Organic Waste','Other Plastics','Paper','Plastic','Textiles','Wood']
     test_d = 'D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Dataset' + waste_types[i] + '/'
     label = waste_types[i]
 
