@@ -16,16 +16,16 @@ import imutils
 import numpy
 
 
-new_model = tf.keras.models.load_model("D:/FILES/SCHOOL/160/ECE160-Waste_Classification/version_three.h5")
+new_model = tf.keras.models.load_model("D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/version_three.h5")
 
-DIR = "D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Dataset"
+DIR = "D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/Dataset"
 train_dataset = tf.keras.preprocessing.image_dataset_from_directory(DIR, validation_split=0.1, subset="training", seed=42, batch_size=128, smart_resize=True, image_size=(256, 256))
 
 dic = train_dataset.class_names
 numClasses = len(train_dataset.class_names)
 
 def capture_waste():
-    cam = cv2.VideoCapture(0) 
+    cam = cv2.VideoCapture(1) 
     cv2.namedWindow("Waste Classifier")
     img_counter = 0
     
@@ -43,14 +43,14 @@ def capture_waste():
             break
         elif k%256 == 32:
             # SPACE pressed
-            img_name = "D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Captured/waste_image{}.jpg".format(img_counter)
+            img_name = "D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/Captured/waste_image{}.jpg".format(img_counter)
             cv2.imwrite(img_name, frame)
             print("{} written!".format(img_name))
             img_counter += 1
     cam.release()
     cv2.destroyAllWindows()
 
-    path = "D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Captured/waste_image0.jpg"
+    path = "D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/Captured/waste_image0.jpg"
 
     img = tf.keras.preprocessing.image.load_img(path, target_size=(256, 256))
     img_array = tf.keras.preprocessing.image.img_to_array(img)
@@ -62,7 +62,7 @@ def capture_waste():
     predictions = new_model.predict(img_array)[0]
     i = np.argmax(predictions)
     waste_types = ['Aluminum','Cardboard','Carton','Glass','Organic Waste','Other Plastics','Paper','Plastic','Textiles','Wood']
-    test_d = 'D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Dataset' + waste_types[i] + '/'
+    test_d = 'D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/Dataset' + waste_types[i] + '/'
     label = waste_types[i]
 
     text = "{}: {:.2f}%".format(label, predictions[i]* 100)
@@ -78,7 +78,7 @@ def capture_waste():
                         )
 
     plt.imshow(cv2.cvtColor(images, cv2.COLOR_BGR2RGB), interpolation = 'bicubic')
-    plt.savefig('D:/FILES/SCHOOL/160/ECE160-Waste_Classification/Waste Type/Test{0}.jpg'.format(i))
+    plt.savefig('D:/User/Documents/COLLEGE  PDF BOOKS/3rd Year 2nd Semester/ECE160/ECE160-Waste_Classification/Waste Type/Test{0}.jpg'.format(i))
     plt.show()
     print(predictions[0]*100, "\n", dic)
     capture_waste()
